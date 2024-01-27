@@ -1,38 +1,89 @@
 .App {
   text-align: center;
+  background-image: url('/public/BG.png');
+  width: 100vw;
+  height: 100vh; /* You must set a specified height */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover;
+  position: relative;
+  overflow: hidden;
+  user-select: none;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.silverHeading {
+  position: absolute;
+  width: 50%;
+  top: 25%;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.heading {
+  position: absolute;
+  width: 50%;
+  top: 15%;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.logo {
+  position: absolute;
+  width: 90%;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.button {
+  position: absolute;
+  bottom: 18%;
+  right: 10%;
+  background-color: white;
+  width: 150px;
+  height: 150px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  border-radius: 50%;
+  cursor: pointer;
+  user-select: none;
+}
+
+.button div {
+  text-align: center;
+  font-size: 40px;
+  font-weight: 100;
+  color: red;
+  margin: auto;
+}
+
+.wrapper {
+  position: absolute;
+  top: 56%;
+  transform: translateY(-50%);
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  left: 0;
+  width: 100%;
+  height: 300px;
 }
 
-.App-link {
-  color: #61dafb;
+.box {
+  width: 180px;
+  height: 280px;
+  border-radius: 10%;
+  margin: 0 5px;
+  background-color: white;
+  display: flex;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.box p{
+  display: block;
+  margin: auto;
+  font-size: 180px;
+  user-select: none !important;
+}
+
+.options {
+  position: absolute;
+  z-index: 5;
 }

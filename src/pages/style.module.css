@@ -1,0 +1,90 @@
+:root {
+    --light-green: #D9FFC5;
+    --background-green: #41A358;
+}
+.dashboard {
+    display: flex;
+}
+.selectBox {
+    width: 240px;
+    height: 40px;
+    border-radius: 8px;
+    background-color: #d40c0c;
+    color: #FFF;
+    display: flex;
+    align-items: center;
+}
+.selectBox div:nth-child(1) {
+    flex: 0 88%;
+}
+.selectBox {
+    cursor: pointer;
+}
+
+.box {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    min-width: 240px;
+}
+
+div[disabled]
+{
+  pointer-events: none;
+  background-color: #e67575;
+}
+
+.selectItem {
+    width: 100%;
+    text-align: center;
+    margin: 0 auto;
+    padding: 3px 0;
+    background-color: #d40c0c;
+    opacity: 0.5;
+}
+.selectItem:nth-child(1) {
+    width: 100%;
+    margin: 0px auto;
+    text-align: center;
+}
+.selectItem:hover {
+    background-color: #d5dbdc;
+    cursor: pointer;
+}
+.selectItem:active {
+    font-size: 18px;
+}
+.height {
+    height: 220px;
+}
+.row {
+    display: flex;
+    padding-top: 4%;
+}
+.date_time {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+}
+.date, .time {
+    display: flex;
+    flex-direction: column;
+}
+.date {
+    margin-right: 7%;
+}
+.content_board {
+    background-color: var(--light-green);
+    flex: 5;
+    padding: 3% 0;
+}
+textarea {
+    border: none;
+    resize: none;
+    outline: none;
+}
+@media only screen and (max-width: 1200px) {
+    .upload {
+        width: 80%;
+    }
+}
