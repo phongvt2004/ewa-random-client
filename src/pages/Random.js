@@ -2,6 +2,10 @@ import style from './style.module.css';
 import ArrowDown from '../images/arrow_down.png';
 import heading from "../images/6.png"
 import silverHeading from "../images/7.png"
+import platinumHeading from "../images/1.png"
+import goldHeading from "../images/2.png"
+import vipHeading from "../images/3.png"
+import supervipHeading from "../images/4.png"
 import logo from "../images/8.png"
 import {useState, useEffect, useRef} from "react";
 
@@ -78,7 +82,13 @@ function Random() {
     platinum: "#1e3f1f",
     vip: "navy",
     supervip: "#272727",
-
+  }
+  const headingCode = {
+    silver: silverHeading  ,
+    gold: goldHeading  ,
+    platinum: platinumHeading  ,
+    vip: vipHeading ,
+    supervip: supervipHeading  ,
   }
   let number1 = useRef(null);
   let number2 = useRef(null);
@@ -143,7 +153,7 @@ function Random() {
       <Options section={section} setSection={setSection}/>
       <img src={logo} alt="Logo" className="logo"/>
       <img src={heading} alt="Heading" className="heading"/>
-      <img src={silverHeading} alt="Logo" className="silverHeading"/>
+      <img src={headingCode[section]} alt="Logo" className="silverHeading"/>
       <div className="wrapper">
         <div className="box"><p style={{color: colorCode[section]}} ref={number1}>0</p></div>
         <div className="box"><p style={{color: colorCode[section]}} ref={number2}>0</p></div>

@@ -98,11 +98,14 @@
   .button {
     bottom: 8%;
   }
+  .box p{
+    font-size: 9vw;
+  }
 }
 
 @media screen and (max-width: 1050px) {
   .box p{
-    font-size: 15vw;
+    font-size: 10vw;
   }
 
   .button {
