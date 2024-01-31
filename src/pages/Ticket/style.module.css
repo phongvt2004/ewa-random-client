@@ -186,17 +186,23 @@
     }
 
     .boxText {
+        margin: 50px 20px;
         width: 20%;
+        height: fit-content;
     }
 
     .input {
+        margin: 40px 20px;
         width: 80%;
         height: 18%;
     }
 
     .heading {
         width: 90%;
+        top: 5%;
     }
+
+
   }
 
 

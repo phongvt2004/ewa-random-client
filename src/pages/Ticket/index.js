@@ -16,7 +16,11 @@ const InputBox = ({phoneNumber, setPhoneNumber, getCustomer}) => {
             <img className={style.boxText} src={sdt} />
             <input type="text" className={style.input} value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)}/>
             <div className={style.submit} onClick={getCustomer}>
-                <img src={tracuu} />
+                <img src={tracuu} onClick={(e) => {
+                    console.log(e.target)
+                    e.stopPropagation()
+                    e.preventDefault()
+                    }}/>
             </div>
         </div> 
     )
