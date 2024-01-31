@@ -1,4 +1,5 @@
 .ticketContainer {
+    user-select: none;
     width: 100%;
     height: 100vh;
     background-image: url("/public/bg.png");
@@ -49,7 +50,6 @@
     left: 50%;
     bottom: 5%;
     transform: translateX(-50%);
-    cursor: pointer;
 }
 
 .submit img {
@@ -105,6 +105,16 @@
     margin: 10px 0;
     font-size: 20px;
     user-select: none;
+}
+
+.click {
+    position: absolute;
+    top: -18px;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 3;
+    cursor: pointer;
 }
 
 .parentBtn a {
@@ -216,6 +226,10 @@
         width: 55%;
     }
 
+    .heading.small {
+        width: 90%;
+    }
+
     .TicketDetail {
         width: 80%;
     }
@@ -226,10 +240,14 @@
   @media screen and (max-height: 600px) {
     .inputBox {
         top: 70%;
+        height: 45%;
     }
 
     .heading {
         width: 40%;
+    }
+    .heading.small {
+        width: 90%;
     }
 
 

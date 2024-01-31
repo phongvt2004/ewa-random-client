@@ -21,6 +21,7 @@ const InputBox = ({phoneNumber, setPhoneNumber, getCustomer}) => {
                     e.stopPropagation()
                     e.preventDefault()
                     }}/>
+                <div className={style.click}></div>
             </div>
         </div> 
     )
@@ -45,7 +46,7 @@ const Ticket = () => {
 
     return (
     <div className={style.ticketContainer}>
-        <img src={customer ? congratulation : ticketHeading} className={style.heading}></img>
+        <img src={customer ? congratulation : ticketHeading} className={customer ? `${style.heading}`:`${style.heading} ${style.small}`}></img>
             {!customer && <InputBox phoneNumber={phoneNumber} setPhoneNumber={setPhoneNumber} getCustomer={getCustomer}/>}
             {customer && <TicketDetail customers={customer}/>}
             <Loading />
