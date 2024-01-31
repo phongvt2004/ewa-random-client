@@ -1,13 +1,15 @@
 import style from './style.module.css';
-import ArrowDown from '../images/arrow_down.png';
-import heading from "../images/6.png"
-import silverHeading from "../images/7.png"
-import platinumHeading from "../images/1.png"
-import goldHeading from "../images/2.png"
-import vipHeading from "../images/3.png"
-import supervipHeading from "../images/4.png"
-import logo from "../images/8.png"
+import axios from 'axios'
+import ArrowDown from '../../images/arrow_down.png';
+import heading from "../../images/6.png"
+import silverHeading from "../../images/7.png"
+import platinumHeading from "../../images/1.png"
+import goldHeading from "../../images/2.png"
+import vipHeading from "../../images/3.png"
+import supervipHeading from "../../images/4.png"
+import logo from "../../images/8.png"
 import {useState, useEffect, useRef} from "react";
+import { SERVER } from '../../helper/constant';
 
 const CategoryOption = ( {show, setShow, section, setSection} ) => {
 
@@ -75,6 +77,35 @@ const Options = ( {section, setSection}) => {
   )
 }
 
+function shuffle(array) {
+  let currentIndex = array.length,  randomIndex;
+
+  // While there remain elements to shuffle.
+  while (currentIndex > 0) {
+
+    // Pick a remaining element.
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+
+    // And swap it with the current element.
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex], array[currentIndex]];
+  }
+
+  return array;
+}
+
+const getRandomNumbers = (array) => {
+  console.log(array)
+  let shuffled_array = shuffle(array);
+  let result = shuffled_array[Math.floor(Math.random() * shuffled_array.length)]
+  result.digits = []
+  for(let i in result.code) {
+    result.digits[i] = Number(result.code[i])
+  }
+  return result
+}
+
 function Random() {
   const colorCode = {
     silver: "#e4c378",
@@ -97,7 +128,20 @@ function Random() {
   let number5 = useRef(null);
   let number6 = useRef(null);
   const [section, setSection] = useState("silver")
-  const ROLLTIME = 4000;
+  const [customerArr, setCustomerArr] = useState([])
+  useEffect(() => {
+    axios.get(`${SERVER}/v1/customer/get/code/type`, {
+        params: {
+            type: section
+        }
+    })
+    .then(response => response.data)
+    .then((data) => {
+      console.log(data)
+      setCustomerArr(data)
+    })
+},[section])
+  const ROLLTIME = 1000;
   const STOP_PER_NUMBER = 3000;
   const delay = async function(delayInms) {
     for(let i = 0; i < 10; i++) {
@@ -136,18 +180,24 @@ function Random() {
   }
   const random = async () => {
     let rollList = [number1, number2, number3, number4, number5, number6];
+    let winner = getRandomNumbers(customerArr);
+    console.log(winner.digits);
     let rollValue = [null, null, null, null, null, null];
     await rolling(ROLLTIME, rollList, rollValue);
     for(let i = 0; i < rollList.length; i++) {
       let pos = i;
-      rollValue[pos] = Math.floor(Math.random() * 10);
+      rollValue[pos] = winner.digits[i];
       console.log(rollValue)
       await rollingUntilValue(pos, rollList, rollValue);
       if(i === rollList.length-1) break;
       await rolling(i === rollList.length-2 ? STOP_PER_NUMBER + 2000 : STOP_PER_NUMBER, rollList, rollValue);
     }
+    alert(winner.name+" "+ winner.phoneNumber)
 
   }
+
+  
+
   return (
     <div className="App">
       <Options section={section} setSection={setSection}/>
