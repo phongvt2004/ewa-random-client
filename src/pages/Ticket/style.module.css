@@ -6,7 +6,7 @@
 }
 
 .heading {
-    width: 90%;
+    width: 80%;
     position: absolute;
     left: 50%;
     top: -8%;
@@ -43,7 +43,6 @@
 .submit {
     position: absolute;
     font-size: 20px;
-    background-color: #931c1c;
     color: #e3bc05 ;
     width: 200px;
     height: 50px;
@@ -53,15 +52,182 @@
     cursor: pointer;
 }
 
-@media screen and (max-height: 700px) {
+.submit img {
+    position: absolute;
+    top: -100%;
+    width: 100%;
+}
+
+.TicketDetail {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    height: 60%;
+    transform: translateX(-50%);
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    overflow: scroll;
+    scroll-behavior: smooth;
+    
+    margin: 0 auto;
+    /* background-color: #fff; */
+    padding: 10px;
+}
+
+.Ticket {
+    width: 90%;
+    margin: 10px auto;
+    display: flex;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.ticketImg {
+    width: 90%;
+}
+
+.btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 0;
+}
+
+.parentBtn {
+    display: flex;
+    justify-content: center;
+    background-color: #e3bc05;
+    color: #931c1c;
+    padding: 10px 5px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin: 10px 0;
+    font-size: 20px;
+    user-select: none;
+}
+
+.parentBtn a {
+    display: none;
+}
+/* 0343411526 */
+.icon {
+    margin: 0 5px;
+}
+
+.text {
+    margin-right: 5px;
+}
+
+@media screen and (max-width: 1200px) {
+    .heading {
+        width: 80%;
+        position: absolute;
+        left: 50%;
+        top: 0%;
+        transform: translate(-50%, 20%);
+    }
+    .TicketDetail {
+        height: 70%;
+    }
+    /* .Ticket {
+        padding-bottom: 150px;
+    }
+
+    .ticketImg {
+        width: 100%;
+    }
+
+    .btn {
+        bottom: 0;
+        top: auto;
+        left: 50%;
+        right: auto;
+        transform: translate(-50%, -10%);
+    } */
+  }
+
+  @media screen and (max-width: 1300px) {
+    .Ticket {
+        padding-bottom: 120px;
+    }
+
+    .ticketImg {
+        width: 90%;
+        margin: auto;
+    }
+
+    .btn {
+        bottom: -0;
+        top: auto;
+        left: 50%;
+        right: auto;
+        transform: translate(-50%, 0%);
+    }
+  }
+
+  @media screen and (max-width: 1660px) {
+    .heading {
+        top: -5%;
+    }
+    .TicketDetail {
+        width: 100%;
+    }
+
+    .Ticket {
+        width: 98%;
+    }
+  }
+
+  @media screen and (max-width: 700px) {
+    .inputBox {
+        height: 30%;
+        width: 90%;
+    }
+
+    .boxText {
+        width: 20%;
+    }
+
+    .input {
+        width: 80%;
+        height: 18%;
+    }
+
+    .heading {
+        width: 90%;
+    }
+  }
+
+
+@media screen and (max-height: 740px) {
     .ticketHeading {
         top: -15%;
         
     }
+
+    .heading {
+        width: 55%;
+    }
+
+    .TicketDetail {
+        width: 80%;
+    }
+
+    
   }
 
   @media screen and (max-height: 600px) {
     .inputBox {
         top: 70%;
+    }
+
+    .heading {
+        width: 40%;
+    }
+
+
+    .TicketDetail {
+        width: 70%;
     }
   }
