@@ -1,1 +1,1 @@
-export const SERVER = "http://116.118.51.13:3002"
+export const SERVER = "https://peerpress.vn/ewa"
