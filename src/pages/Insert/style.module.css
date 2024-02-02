@@ -1,0 +1,70 @@
+.insertWrapper {
+    width: 100vw;
+    height: 100vh;
+    background-image: url("/public/bg2.png");
+    user-select: none;
+}
+
+.insertBox {
+    width: 500px;
+    height: 700px;
+    background-color: #fff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.insert {
+    margin: 20px auto;
+    width: 80%;
+}
+
+.heading {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.input {
+    width: 100%;
+    padding: 5px;
+    font-size: 20px;
+}
+
+.options {
+    width: 40%;
+    position: relative;
+}
+
+.selectBox {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 8px;
+    border: 2px solid #000;
+}
+
+.box {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: aqua;
+}
+
+.row {
+    display: flex;
+    flex-direction: row !important;
+    justify-content: space-between;
+}
+
+.selectItem {
+    padding: 8px;
+}
+
+.insert label {
+    padding: 5px;
+    margin-right: 40px;
+}

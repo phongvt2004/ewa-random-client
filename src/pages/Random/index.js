@@ -1,81 +1,19 @@
 import style from './style.module.css';
 import axios from 'axios'
-import ArrowDown from '../../images/arrow_down.png';
 import heading from "../../images/6.png"
 import silverHeading from "../../images/7.png"
 import platinumHeading from "../../images/1.png"
 import goldHeading from "../../images/2.png"
 import vipHeading from "../../images/3.png"
 import supervipHeading from "../../images/4.png"
+import Layer from "../../components/Layer"
+import PopUp from "../../components/PopUp"
 import logo from "../../images/8.png"
 import {useState, useEffect, useRef} from "react";
 import { SERVER } from '../../helper/constant';
+import TypeOptions from '../../components/TypeOptions';
+import RoundOptions from '../../components/RoundOptions';
 
-const CategoryOption = ( {show, setShow, section, setSection} ) => {
-
-  const handleClick = ( e ) => {
-      e.stopPropagation();
-      setShow(!show);
-      setSection(e.target.getAttribute('value'));
-      // console.log(section);
-  }
-  return (
-      <div className={`${style.box}`}>
-          <div 
-              className={`${style.selectItem}`} 
-              value={'silver'}
-              disabled={section === "silver" ? true : false}
-              onClick={(e) => handleClick(e)}>
-              Silver
-          </div>
-          <div 
-              className={`${style.selectItem}`} 
-              value={'gold'}
-              disabled={section === "gold" ? true : false}
-              onClick={(e) => handleClick(e)}>
-              Gold
-          </div>
-          <div 
-              className={`${style.selectItem}`} 
-              value={'platinum'}
-              disabled={section === "platinum" ? true : false}
-              onClick={(e) => handleClick(e)}>
-              Platinum
-          </div>
-          <div 
-              className={`${style.selectItem}`} 
-              value={'vip'}
-              disabled={section === "vip" ? true : false}
-              onClick={(e) => handleClick(e)}>
-              Vip
-          </div>
-          <div 
-              className={`${style.selectItem}`}
-              value={'supervip'}
-              disabled={section === "supervip" ? true : false}
-              onClick={(e) => handleClick(e)}>
-              Supervip
-          </div>
-      </div>
-  )
-}
-const Options = ( {section, setSection}) => {
-  const [show, setShow] = useState(false);
-
-  return (
-      <div className={`${style.height} options`}>
-          <div className={`${style.selectBox}`} onClick={() => setShow(!show)} >
-              <div>
-                  {section || "Chọn loại vé"} 
-              </div>
-              <div>
-                  <img src={ArrowDown} />
-              </div>
-          </div>
-          {show && (<CategoryOption show={show} setShow={setShow} section={section} setSection={setSection}/>) }
-      </div>
-  )
-}
 
 function shuffle(array) {
   let currentIndex = array.length,  randomIndex;
@@ -106,6 +44,19 @@ const getRandomNumbers = (array) => {
   return result
 }
 
+const WinnerMessage = ({name, code}) => {
+  return (
+    <div className={style.message}>
+      <p className={style.messageBlock}>
+        Xin chúc mừng quý khách <span>{name}</span>  
+      </p>
+      <p className={style.messageBlock}>
+        Có mã số <span>{code}</span> đã trúng thưởng
+      </p>
+    </div>
+  )
+}
+
 function Random() {
   const colorCode = {
     silver: "#e4c378",
@@ -127,20 +78,41 @@ function Random() {
   let number4 = useRef(null);
   let number5 = useRef(null);
   let number6 = useRef(null);
+  
   const [section, setSection] = useState("silver")
   const [customerArr, setCustomerArr] = useState([])
+  const [winner, setWinner] = useState(null)
+  const [display, setDisplay] = useState(false)
+  const [round, setRound] = useState(1)
+  const [roundNumber, setRoundNumber] = useState(1)
+  const rollBtn = useRef(null)
   useEffect(() => {
-    axios.get(`${SERVER}/v1/customer/get/code/type`, {
-        params: {
-            type: section
-        }
+    if(display === false && winner !== null) setWinner(null)
+  }, [display])
+  useEffect(() => {
+    let api = section === "vip" ? `${SERVER}/v1/customer/get/type` : `${SERVER}/v1/customer/get/type/buytype`
+    let params = {
+      type: section
+    }
+
+    if(section === "silver") {
+      if(round === 1) params.online = true
+      else params.online = false
+    } else if (section === "gold") params.online = false
+    else if (section === "platinum") {
+      if(round <=2) params.online = false
+      else params.online = true
+    } else if(section === "supervip") params.online = false
+
+    axios.get(api, {
+        params: params
     })
     .then(response => response.data)
     .then((data) => {
       console.log(data)
       setCustomerArr(data)
     })
-},[section])
+},[section, round])
   const ROLLTIME = 1000;
   const STOP_PER_NUMBER = 3000;
   const delay = async function(delayInms) {
@@ -179,6 +151,8 @@ function Random() {
     }
   }
   const random = async () => {
+    rollBtn.current.setAttribute("disabled", true)
+
     let rollList = [number1, number2, number3, number4, number5, number6];
     let winner = getRandomNumbers(customerArr);
     console.log(winner.digits);
@@ -192,15 +166,32 @@ function Random() {
       if(i === rollList.length-1) break;
       await rolling(i === rollList.length-2 ? STOP_PER_NUMBER + 2000 : STOP_PER_NUMBER, rollList, rollValue);
     }
-    alert(winner.name+" "+ winner.phoneNumber)
-
+    setWinner(winner);
+    setDisplay(true);
+    rollBtn.current.setAttribute("disabled", false)
   }
 
-  
+  useEffect(() => {
+    setRound(1);
+    switch(section) {
+      case "platinum":
+        setRoundNumber(3);
+        break;
+      case "supervip":
+        setRoundNumber(1);
+        break;
+      case "gold":
+      case "silver":
+      case "vip":
+        setRoundNumber(2);
+        break;
+    }
+  }, [section]);
 
   return (
     <div className="App">
-      <Options section={section} setSection={setSection}/>
+      <TypeOptions section={section} setSection={setSection}/>
+      <RoundOptions round={round} setRound={setRound} roundNumber={roundNumber}/>
       <img src={logo} alt="Logo" className="logo"/>
       <img src={heading} alt="Heading" className="heading"/>
       <img src={headingCode[section]} alt="Logo" className="silverHeading"/>
@@ -212,7 +203,11 @@ function Random() {
         <div className="box"><p style={{color: colorCode[section]}} ref={number5}>0</p></div>
         <div className="box"><p style={{color: colorCode[section]}} ref={number6}>0</p></div>
       </div>
-      <div className="button" onClick={random}><div>Quay</div></div>
+      <div className="button" ref={rollBtn} onClick={random}>
+        <div>Quay</div>
+        </div>
+      {display && <Layer setDisplay={setDisplay}/>}
+      {display && <PopUp Message = {WinnerMessage} name={winner.name} code = {winner.code} setDisplay={setDisplay}/>}
     </div>
   );
 }

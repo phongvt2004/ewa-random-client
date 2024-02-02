@@ -1,0 +1,29 @@
+.popup {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 800px;
+    height: 300px;
+    background-color: #fff;
+    border-radius: 10px;
+    z-index: 11;
+    display: flex;
+    flex-direction: column;
+    opacity: 0.9;
+}
+
+.cancel {
+    color: #931c1c;
+    font-size: 50px;
+    margin-left: auto;
+    padding: 12px;
+    cursor: pointer;
+}
+
+.message {
+    margin: 20px auto;
+    font-size: 28px;
+    font-weight: 600;
+    opacity: 0.8;
+}
