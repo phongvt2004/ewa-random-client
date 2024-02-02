@@ -100,6 +100,7 @@ const Insert = () => {
                         <input type="radio" name="buyType" id="offline" value={false}/> <label for="offline">Offline</label>
                     </div>
                 </div>
+                <button class={style.submit}>Thêm</button>
             </div>
         </div>
     )
