@@ -166,9 +166,10 @@ function Random() {
       if(i === rollList.length-1) break;
       await rolling(STOP_PER_NUMBER + i*1000, rollList, rollValue);
     }
+    rollBtn.current.removeAttribute("disabled")
+
     setWinner(winner);
     setDisplay(true);
-    rollBtn.current.setAttribute("disabled", false)
   }
 
   useEffect(() => {
