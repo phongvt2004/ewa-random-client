@@ -38,8 +38,8 @@
 
 .logo {
   position: absolute;
-  width: 90%;
-  top: 0;
+  width: 61%;
+  top: -5%;
   left: 50%;
   transform: translateX(-50%);
 }

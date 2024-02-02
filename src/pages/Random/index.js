@@ -8,7 +8,7 @@ import vipHeading from "../../images/3.png"
 import supervipHeading from "../../images/4.png"
 import Layer from "../../components/Layer"
 import PopUp from "../../components/PopUp"
-import logo from "../../images/8.png"
+import logo from "../../images/LOGO.png"
 import {useState, useEffect, useRef} from "react";
 import { SERVER } from '../../helper/constant';
 import TypeOptions from '../../components/TypeOptions';
