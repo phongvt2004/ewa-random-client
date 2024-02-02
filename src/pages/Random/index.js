@@ -114,7 +114,7 @@ function Random() {
     })
 },[section, round])
   const ROLLTIME = 1000;
-  const STOP_PER_NUMBER = 3000;
+  const STOP_PER_NUMBER = 1000;
   const delay = async function(delayInms) {
     for(let i = 0; i < 10; i++) {
         return new Promise(resolve => setTimeout(resolve, delayInms));
@@ -164,7 +164,7 @@ function Random() {
       console.log(rollValue)
       await rollingUntilValue(pos, rollList, rollValue);
       if(i === rollList.length-1) break;
-      await rolling(i === rollList.length-2 ? STOP_PER_NUMBER + 2000 : STOP_PER_NUMBER, rollList, rollValue);
+      await rolling(STOP_PER_NUMBER + i*1000, rollList, rollValue);
     }
     setWinner(winner);
     setDisplay(true);
