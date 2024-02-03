@@ -1,6 +1,10 @@
 import style from "./style.module.css";
 import {useState} from "react";
 import ArrowDown from '../../images/arrow_down.png';
+import {SERVER} from "../../helper/constant"
+import axios from "axios"
+import Layer from "../../components/Layer"
+import Message from "../../components/Message";
 
 const CategoryOption = ( {show, setShow, section, setSection} ) => {
 
@@ -72,17 +76,47 @@ const Insert = () => {
     const [name, setName] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
     const [code, setCode] = useState("");
-    const [online, setOnline] = useState(true);
     const [type, setType] = useState("silver");
+    const [display, setDisplay] = useState(false);
+    const [message, setMessage] = useState("");
+    const [messageType, setMessageType] = useState("");
+
+    const createCustomer = () => {
+        let data = {
+            name,
+            phoneNumber,
+            code,
+            type
+        }
+        data.time = new Date();
+        if(document.getElementById("online").checked) data.online = true;
+        else if(document.getElementById("offline").checked) data.online = false;
+        axios.post(`${SERVER}/v1/customer/create`, data)
+        .then(response => response.data)
+        .then(data => {
+            if(data?.code === 500) {
+                setMessage(data?.message)
+                setMessageType("error")
+                setDisplay(true);
+            }
+            else {
+                setMessage("Success")
+                setMessageType("info")
+                setDisplay(true);
+            }
+
+        })
+    }
+
     return (
         <div className={style.insertWrapper}>
-            <div className={style.insertBox}>
+            <div className={style.insertBox} onKeyDown={(e) => console.log(e.key)}>
                 <div className={style.insert}>
                     <div className={style.heading}>Họ và tên</div>
                     <input type="text" className={style.input} value={name} onChange={(e) => setName(e.target.value)}></input>
                 </div>
                 <div className={style.insert}>
-                    <div className={style.heading}>Số diện thoại</div>
+                    <div className={style.heading}>Số điện thoại</div>
                     <input type="text" className={style.input} value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)}></input>
                 </div>
                 <div className={style.insert}>
@@ -96,12 +130,14 @@ const Insert = () => {
                 <div className={style.insert}>
                     <div className={style.heading}>Online hay offline</div>
                     <div className={style.input}>
-                        <input type="radio" name="buyType" id="online" value={true} checked/> <label for="online">Online</label>
-                        <input type="radio" name="buyType" id="offline" value={false}/> <label for="offline">Offline</label>
+                        <input className={style.radio} type="radio" name="buyType" id="online" defaultChecked/> <label htmlFor="online">Online</label>
+                        <input className={style.radio} type="radio" name="buyType" id="offline"/> <label htmlFor="offline">Offline</label>
                     </div>
                 </div>
-                <button class={style.submit}>Thêm</button>
+                <button className={style.submit}>Thêm</button>
             </div>
+            {display && <Layer setDisplay={setDisplay}/>}
+            {display &&  <Message type={messageType} message={message} setDisplay={setDisplay}/>}
         </div>
     )
 }

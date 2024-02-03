@@ -64,14 +64,21 @@
     padding: 8px;
 }
 
+.radio {
+    padding: 5px;
+    transform: scale(1.7);
+    cursor: pointer;
+}
+
 .insert label {
     padding: 5px;
     margin-right: 40px;
+    cursor: pointer;
 }
 
 .submit {
-    max-width: 500px;
-    font-size: 20px;
+    width: 200px;
+    font-size: 23px;
     font-weight: 800;
     padding: 10px 30px;
     margin: 10px auto 0;

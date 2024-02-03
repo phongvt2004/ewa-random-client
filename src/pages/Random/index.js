@@ -108,18 +108,19 @@ function Random() {
   }, [display])
   useEffect(() => {
     let api = section === "vip" ? `${SERVER}/v1/customer/get/type` : `${SERVER}/v1/customer/get/type/buytype`
+    api = `${SERVER}/v1/customer/get/type`
     let params = {
       type: section
     }
 
-    if(section === "silver") {
-      if(round === 1) params.online = true
-      else params.online = false
-    } else if (section === "gold") params.online = false
-    else if (section === "platinum") {
-      if(round <=2) params.online = false
-      else params.online = true
-    } else if(section === "supervip") params.online = false
+    // if(section === "silver") {
+    //   if(round === 1) params.online = true
+    //   else params.online = false
+    // } else if (section === "gold") params.online = false
+    // else if (section === "platinum") {
+    //   if(round <=2) params.online = false
+    //   else params.online = true
+    // } else if(section === "supervip") params.online = false
 
     axios.get(api, {
         params: params

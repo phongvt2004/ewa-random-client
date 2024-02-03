@@ -1,0 +1,55 @@
+.messageBox {
+    background-color: #fff;
+    width: 450px;
+    height: 250px;
+    border-radius: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 12;
+    display: flex;
+}
+
+.message {
+    margin: auto;
+    width: 85%;
+    position: relative;
+    height: 90%;
+}
+
+.icon {
+    font-size: 38px;
+    top: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+    position: absolute;
+    display: flex;
+}
+
+.iconImg {
+    margin: 3px 0;
+}
+
+.icon p {
+    margin: 0 10px;
+    text-transform: capitalize;
+}
+
+.messageText {
+    margin: 50px 0 30px;
+    width: 100%;
+    word-wrap: break-word;
+    font-size: 20px;
+    text-align: center;
+}
+
+.btn {
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+    padding: 5px 20px;
+    font-size: 25px;
+    border-radius: 10px;
+    cursor: pointer;
+}
