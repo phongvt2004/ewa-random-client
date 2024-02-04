@@ -59,7 +59,7 @@ const WinnerMessage = ({name, code}) => {
   return (
     <div className={style.message}>
       <p className={style.messageBlock}>
-        Xin chúc mừng quý khách <span>{name}</span>  
+        Xin chúc mừng quý khách
       </p>
       <p className={style.messageBlock}>
         Có mã số <span>{code}</span> đã trúng thưởng
