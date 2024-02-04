@@ -40,9 +40,14 @@ function shuffle(array) {
 }
 
 const getRandomNumbers = (array) => {
-  console.log(array)
-  let shuffled_array = shuffle(array);
+  let code_array = array.map(customer => customer.code);
+  code_array = new Set(code_array)
+  code_array = Array.from(code_array)
+  let shuffled_array = shuffle(code_array);
   let result = shuffled_array[Math.floor(Math.random() * shuffled_array.length)]
+  result = array.filter(customer => customer.code === result);
+  result.sort((a, b) => a.time - b.time);
+  result = result[0];
   result.digits = []
   for(let i in result.code) {
     result.digits[i] = Number(result.code[i])
@@ -126,7 +131,6 @@ function Random() {
     })
     .then(response => response.data)
     .then((data) => {
-      console.log(data)
       setCustomerArr(data)
     })
 },[section, round])
@@ -139,7 +143,6 @@ function Random() {
 }
 
   const rolling = async (stop, rollList, rollValue) => {
-    console.log(stop)
     let time = 0;
     while (true) {
       if(time >= stop) break; 
@@ -176,7 +179,6 @@ function Random() {
 
     let rollList = [number1, number2, number3, number4, number5, number6];
     let winner;
-    console.log(customerArr)
     if(customerArr.length === 0) {
       alert("There are no customers left!")
       rollBtn.current.removeAttribute("disabled")
@@ -188,14 +190,12 @@ function Random() {
         winner.digits[i] = Number(winner.code[i])
       }
     } else winner = getRandomNumbers(customerArr);
-    console.log(winner.digits);
     let rollValue = [null, null, null, null, null, null];
     randomSound();
     await rolling(ROLLTIME, rollList, rollValue);
     for(let i = 0; i < rollList.length; i++) {
       let pos = i;
       rollValue[pos] = winner.digits[i];
-      console.log(rollValue)
       await rollingUntilValue(pos, rollList, rollValue);
       stopSound();
       if(i === rollList.length-1) break;
