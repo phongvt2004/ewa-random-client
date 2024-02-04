@@ -85,7 +85,6 @@ const Insert = () => {
     useEffect(() => {
         if(!display) {
             setName("");
-            setPhoneNumber("");
             setCode("");
             setType("silver");
         }
@@ -125,10 +124,6 @@ const Insert = () => {
                 <div className={style.insert}>
                     <div className={style.heading}>Họ và tên</div>
                     <input type="text" className={style.input} value={name} onChange={(e) => setName(e.target.value)}></input>
-                </div>
-                <div className={style.insert}>
-                    <div className={style.heading}>Số điện thoại</div>
-                    <input type="text" className={style.input} value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)}></input>
                 </div>
                 <div className={style.insert}>
                     <div className={style.heading}>Mã</div>
