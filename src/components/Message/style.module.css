@@ -16,11 +16,12 @@
     width: 85%;
     position: relative;
     height: 90%;
+    display: flex;
 }
 
 .icon {
     font-size: 38px;
-    top: 0px;
+    top: 10px;
     left: 50%;
     transform: translateX(-50%);
     position: absolute;
@@ -37,7 +38,7 @@
 }
 
 .messageText {
-    margin: 50px 0 30px;
+    margin: auto 0;
     width: 100%;
     word-wrap: break-word;
     font-size: 20px;

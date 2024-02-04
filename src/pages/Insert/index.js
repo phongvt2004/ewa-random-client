@@ -1,5 +1,5 @@
 import style from "./style.module.css";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import ArrowDown from '../../images/arrow_down.png';
 import {SERVER} from "../../helper/constant"
 import axios from "axios"
@@ -80,13 +80,24 @@ const Insert = () => {
     const [display, setDisplay] = useState(false);
     const [message, setMessage] = useState("");
     const [messageType, setMessageType] = useState("");
+    const test = window.location.href.split("/")[window.location.href.split("/").length-1] === "test";
+
+    useEffect(() => {
+        if(!display) {
+            setName("");
+            setPhoneNumber("");
+            setCode("");
+            setType("silver");
+        }
+    }, [display]);
 
     const createCustomer = () => {
         let data = {
             name,
             phoneNumber,
             code,
-            type
+            type,
+            test
         }
         data.time = new Date();
         if(document.getElementById("online").checked) data.online = true;
@@ -110,7 +121,7 @@ const Insert = () => {
 
     return (
         <div className={style.insertWrapper}>
-            <div className={style.insertBox} onKeyDown={(e) => console.log(e.key)}>
+            <div className={style.insertBox} onKeyDown={(e) => {if(e?.key === "Enter") createCustomer()}}>
                 <div className={style.insert}>
                     <div className={style.heading}>Họ và tên</div>
                     <input type="text" className={style.input} value={name} onChange={(e) => setName(e.target.value)}></input>
@@ -134,7 +145,7 @@ const Insert = () => {
                         <input className={style.radio} type="radio" name="buyType" id="offline"/> <label htmlFor="offline">Offline</label>
                     </div>
                 </div>
-                <button className={style.submit}>Thêm</button>
+                <button className={style.submit} onClick={createCustomer} >{test ? "Test" : "Thêm"}</button>
             </div>
             {display && <Layer setDisplay={setDisplay}/>}
             {display &&  <Message type={messageType} message={message} setDisplay={setDisplay}/>}
