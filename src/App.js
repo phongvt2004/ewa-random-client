@@ -13,7 +13,7 @@ function App() {
           <Route path="/" element={<Ticket />} />
           <Route path="random" element={<Random />} />
           <Route path="ticket" element={<Ticket />} />
-          <Route path="/insert/:test" element={<Insert />} />
+          <Route path="insert" element={<Insert />} />
         </Routes>
       </Router>
     </React.StrictMode>
